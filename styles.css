@@ -128,14 +128,10 @@ h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 600; line-height: 1
 }
 .nav__inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
 
-.brand { display: inline-flex; align-items: center; gap: 12px; }
-.brand__mark {
-  width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center;
-  background: var(--grad-primary); color: #fff; font-family: var(--font-head);
-  font-weight: 700; font-size: 1.4rem; box-shadow: var(--shadow-sm);
-}
-.brand__text { font-family: var(--font-head); font-weight: 600; font-size: 1.42rem; letter-spacing: .02em; }
-.brand__text span { color: var(--primary); }
+.brand { display: inline-flex; align-items: center; }
+.brand__logo { height: 56px; width: auto; display: block; transition: height .35s var(--ease); }
+.nav.scrolled .brand__logo { height: 46px; }
+.brand__logo--footer { height: 104px; border-radius: 20px; }
 
 .nav__links { display: flex; align-items: center; gap: 30px; }
 .nav__links a { position: relative; font-size: 0.92rem; font-weight: 400; color: var(--text); transition: color .25s; }
@@ -171,61 +167,19 @@ h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 600; line-height: 1
 .hero__sub { color: var(--muted); font-size: 1.06rem; max-width: 540px; margin-bottom: 34px; }
 .hero__actions { display: flex; flex-wrap: wrap; gap: 14px; }
 
-/* Hero art / device mockups */
-.hero__art { position: relative; min-height: 440px; }
+/* Hero art / framed image */
+.hero__art { position: relative; display: flex; justify-content: center; animation: floatY 7s ease-in-out infinite; }
 
 .floral { position: absolute; color: var(--gold-soft); font-size: 2.4rem; opacity: .6; z-index: 3; pointer-events: none; }
-.floral--tl { top: -6px; left: 4px; animation: float 7s ease-in-out infinite; }
-.floral--br { bottom: 0; right: 10px; animation: float 8s ease-in-out infinite reverse; }
+.floral--tl { top: -16px; left: -8px; animation: float 7s ease-in-out infinite; }
+.floral--br { bottom: -14px; right: -8px; animation: float 8s ease-in-out infinite reverse; }
 
-.device__screen, .mock { border-radius: 18px; }
-.device--laptop {
-  position: absolute; top: 40px; left: 0; width: 88%;
-  animation: floatY 6s ease-in-out infinite;
+.hero__frame {
+  position: relative; width: 100%; border-radius: 28px; overflow: hidden;
+  background: linear-gradient(160deg, #FDF1EE 0%, #F8D7DF 100%);
+  border: 6px solid #fff; box-shadow: var(--shadow-lg);
 }
-.device--laptop .device__screen {
-  background: #fff; border: 6px solid #fff; border-radius: 16px 16px 4px 4px;
-  box-shadow: var(--shadow-lg); overflow: hidden;
-}
-.device__base { height: 14px; background: linear-gradient(#f0e4e0,#e4d2cd); border-radius: 0 0 12px 12px; width: 106%; margin-left: -3%; box-shadow: var(--shadow); }
-
-.mock--laptop {
-  background: radial-gradient(120% 120% at 50% 0%, #FDF1EE 0%, #F8D7DF 100%);
-  padding: 34px 26px 30px; text-align: center;
-}
-.mock__ribbon {
-  display: inline-block; font-size: .68rem; letter-spacing: .2em; text-transform: uppercase;
-  color: var(--gold); border: 1px solid var(--gold-soft); padding: 5px 16px; border-radius: 100px; margin-bottom: 14px;
-}
-.mock__names { font-family: var(--font-head); font-size: 1.7rem; color: var(--primary-dark); }
-.mock__names--sm { font-size: 1.15rem; }
-.mock__date { color: var(--muted); letter-spacing: .18em; font-size: .82rem; margin-top: 4px; }
-.mock__countdown { display: flex; justify-content: center; gap: 10px; margin: 18px 0; }
-.mock__countdown span {
-  background: #fff; border-radius: 12px; padding: 8px 12px; min-width: 46px;
-  display: flex; flex-direction: column; box-shadow: var(--shadow-sm); font-size: .6rem; color: var(--muted); letter-spacing: .1em;
-}
-.mock__countdown b { font-family: var(--font-head); font-size: 1.1rem; color: var(--primary); }
-.mock__btn { display: inline-block; background: var(--grad-primary); color: #fff; padding: 9px 22px; border-radius: 100px; font-size: .82rem; box-shadow: 0 10px 20px rgba(217,92,122,.3); }
-.mock__btn--sm { padding: 7px 16px; font-size: .72rem; }
-
-.device--phone {
-  position: absolute; bottom: -10px; right: 0; width: 158px; z-index: 4;
-  background: #fff; border-radius: 30px; padding: 12px 10px 16px;
-  box-shadow: var(--shadow-lg); border: 4px solid #fff;
-  animation: floatY 6s ease-in-out infinite 1.2s;
-}
-.device__notch { width: 46px; height: 5px; background: #e9d7d2; border-radius: 100px; margin: 2px auto 10px; }
-.mock--phone { background: linear-gradient(180deg,#fff 0%, #FDF1EE 100%); border-radius: 20px; padding: 12px; text-align: center; }
-.mock__photo {
-  height: 92px; border-radius: 14px; margin-bottom: 12px;
-  background: radial-gradient(120% 120% at 30% 20%, #F8D7DF 0%, #E5738F 100%);
-  position: relative; overflow: hidden;
-}
-.mock__photo::after { content: "❀"; position: absolute; inset: 0; display: grid; place-items: center; color: rgba(255,255,255,.85); font-size: 1.6rem; }
-.mock__ceremony { font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); }
-.mock__chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; margin: 10px 0; }
-.mock__chips span { font-size: .58rem; background: #fff; border: 1px solid var(--secondary); color: var(--muted); padding: 4px 8px; border-radius: 100px; }
+.hero__img { display: block; width: 100%; height: auto; }
 
 /* =========================================================
    About
@@ -358,7 +312,6 @@ h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 600; line-height: 1
    ========================================================= */
 .footer { background: #2a2224; color: #e9dcd8; padding-top: 66px; }
 .footer__grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 40px; padding-bottom: 48px; }
-.brand--footer .brand__text { color: #fff; }
 .footer__tag { color: var(--gold-soft); letter-spacing: .1em; margin: 16px 0 12px; font-size: .9rem; }
 .footer__desc { color: #b8a9a4; font-size: .9rem; max-width: 340px; }
 .footer__col h4 { font-family: var(--font-body); font-weight: 600; font-size: .8rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold-soft); margin-bottom: 18px; }
@@ -452,7 +405,7 @@ body.menu-open { overflow: hidden; }
   .to-top { bottom: 86px; right: 18px; }
 
   /* Calmer motion on phones (battery friendly) */
-  .device--laptop, .device--phone, .floral,
+  .hero__art, .floral,
   .about__card--1, .about__card--3 { animation: none !important; }
 }
 
@@ -469,15 +422,11 @@ body.menu-open { overflow: hidden; }
   .hero__actions { flex-direction: column; align-items: stretch; }
   .hero__actions .btn { width: 100%; }
 
-  /* On phones, show a single centered invite mockup (no overlap/clipping) */
-  .hero__art { min-height: auto; max-width: 320px; display: flex; justify-content: center; }
-  .device--laptop { display: none; }
-  .device--phone {
-    position: static; width: 250px; margin: 0 auto;
-    top: auto; right: auto; bottom: auto; left: auto;
-  }
-  .floral--tl { top: -14px; left: 6px; }
-  .floral--br { bottom: 6px; right: 6px; }
+  /* Centered framed hero image on phones */
+  .hero__art { max-width: 360px; margin: 0 auto; }
+  .hero__frame { border-width: 5px; border-radius: 24px; }
+  .floral--tl { top: -12px; left: -4px; font-size: 2rem; }
+  .floral--br { bottom: -10px; right: -4px; font-size: 2rem; }
 
   /* Tighter, comfier cards + spacing */
   .card { padding: 26px 22px; }
@@ -495,9 +444,9 @@ body.menu-open { overflow: hidden; }
 
 @media (max-width: 380px) {
   .hero__title { font-size: clamp(1.9rem, 10vw, 2.4rem); }
-  .brand__text { font-size: 1.28rem; }
+  .brand__logo { height: 46px; }
   .mobile-bar__btn { font-size: .82rem; }
-  .device--phone { width: 220px; }
+  .hero__art { max-width: 300px; }
 }
 
 /* Reduced motion */

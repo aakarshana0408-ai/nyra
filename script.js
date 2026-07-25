@@ -72,27 +72,4 @@
   /* ---- Auto-update footer year ---- */
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-  /* ---- Live countdown in the hero mockup (demo) ---- */
-  const cd = document.querySelector(".mock__countdown");
-  if (cd) {
-    // Target: ~140 days from today, purely illustrative
-    const target = new Date();
-    target.setDate(target.getDate() + 140);
-
-    const cells = cd.querySelectorAll("b");
-    const pad = (n) => String(n).padStart(2, "0");
-
-    const tick = () => {
-      const diff = Math.max(0, target - new Date());
-      const days = Math.floor(diff / 86400000);
-      const hrs = Math.floor((diff / 3600000) % 24);
-      const mins = Math.floor((diff / 60000) % 60);
-      if (cells[0]) cells[0].textContent = days;
-      if (cells[1]) cells[1].textContent = pad(hrs);
-      if (cells[2]) cells[2].textContent = pad(mins);
-    };
-    tick();
-    setInterval(tick, 60000);
-  }
 })();
