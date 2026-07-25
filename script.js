@@ -4,46 +4,47 @@
 (function () {
   "use strict";
 
-  /* ---- Sticky navigation shadow on scroll ---- */
+  /* ---- Sticky nav + back-to-top + mobile contact bar on scroll ---- */
   const nav = document.getElementById("nav");
   const toTop = document.getElementById("toTop");
+  const mobileBar = document.getElementById("mobileBar");
 
   const onScroll = () => {
     const y = window.scrollY;
     nav.classList.toggle("scrolled", y > 30);
     toTop.classList.toggle("show", y > 600);
+    // Reveal the sticky contact bar once past the hero
+    if (mobileBar) mobileBar.classList.toggle("show", y > 480);
   };
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
-  /* ---- Mobile menu toggle ---- */
+  /* ---- Mobile menu toggle (with scrim + scroll lock) ---- */
   const toggle = document.getElementById("navToggle");
   const links = document.getElementById("navLinks");
+  const scrim = document.getElementById("navScrim");
 
-  const closeMenu = () => {
-    links.classList.remove("open");
-    toggle.classList.remove("open");
-    toggle.setAttribute("aria-expanded", "false");
-  };
-
-  toggle.addEventListener("click", () => {
-    const open = links.classList.toggle("open");
+  const setMenu = (open) => {
+    links.classList.toggle("open", open);
     toggle.classList.toggle("open", open);
     toggle.setAttribute("aria-expanded", String(open));
-  });
-
-  // Close menu when a link is tapped
-  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", closeMenu));
-
-  // Close menu when clicking outside
-  document.addEventListener("click", (e) => {
-    if (
-      links.classList.contains("open") &&
-      !links.contains(e.target) &&
-      !toggle.contains(e.target)
-    ) {
-      closeMenu();
+    document.body.classList.toggle("menu-open", open);
+    if (scrim) {
+      scrim.hidden = false;
+      scrim.classList.toggle("show", open);
     }
+  };
+  const closeMenu = () => setMenu(false);
+
+  toggle.addEventListener("click", () => setMenu(!links.classList.contains("open")));
+
+  // Close menu when a link is tapped or the scrim is clicked
+  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", closeMenu));
+  if (scrim) scrim.addEventListener("click", closeMenu);
+
+  // Close menu on Escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && links.classList.contains("open")) closeMenu();
   });
 
   /* ---- Scroll reveal animations ---- */
